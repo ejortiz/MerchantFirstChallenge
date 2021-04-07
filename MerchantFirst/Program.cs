@@ -22,7 +22,7 @@ namespace MerchantFirst
             
         }
 
-        public static string GenerateStringFromValue(int input, int value1, string text1, int value2, string text2)
+        private static string GenerateStringFromValue(int input, int value1, string text1, int value2, string text2)
         {
             string output = "";
             bool multipleOfVal1 = input % value1 == 0;
