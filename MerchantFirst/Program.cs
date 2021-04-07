@@ -65,18 +65,16 @@ namespace MerchantFirst
                 var sepLine = line.Split(sep);
                 bool validInput1 = int.TryParse(sepLine[0], out int val1);
                 bool validInput2 = int.TryParse(sepLine[1], out int val2);
-                if (!validInput1 || !validInput2 || val1 == 0 || val2 == 0)
+                if (validInput1 && validInput2 && val1 != 0 && val2 != 0)
+                {
+                    string result = GenPassFail(val1, val2);
+                    string newLine = string.Join(sep, sepLine[0], sepLine[1], result);
+                    newLines.Add(newLine);
+                }
+                else
                 {
                     newLines.Add(string.Join(sep, sepLine[0], sepLine[1], "error"));
-                    continue;
-                    // throw new InvalidCastException("Could not convert " + 
-                    //                                sepLine[0] + " or " + 
-                    //                                sepLine[1] +
-                    //                                " to string. Please correct input file.");
                 }
-                string result = GenPassFail(val1, val2);
-                string newLine = string.Join(sep, sepLine[0], sepLine[1], result);
-                newLines.Add(newLine);
             }
             File.WriteAllLines(outputfile, newLines, Encoding.UTF8);
         }
